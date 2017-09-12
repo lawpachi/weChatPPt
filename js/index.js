@@ -5,11 +5,26 @@
     var pageUl = document.querySelector('.pageUl');
     var pageList = document.querySelectorAll('.pageUl li');
     var clientHeight = document.body.clientHeight;
+    var music = document.querySelector('.music');
+    var musicBg = document.querySelector('.musicBg');
+    var audio = document.querySelector('.audio');    
+    var current;
     _initPage();
     function _initPage() {
         page.addEventListener('touchstart', _start);
         page.addEventListener('touchmove', _move);
         page.addEventListener('touchend', _end);
+        music.addEventListener('click', _toggleMusic)
+    }
+    
+    function _toggleMusic() {
+        if(audio.paused) {
+            musicBg.setAttribute('src', 'images/open.png')
+            audio.play()
+        }else{
+            audio.pause()
+            musicBg.setAttribute('src', 'images/close1.png')
+        }
     }
     function _start(e) {
         if (e.type == "touchstart") {
@@ -33,22 +48,24 @@
     }
     function _end() {
         if (Math.abs(moveY) > 70) { //移动距离大于70
-            if(moveY > 0) {
+            if(moveY > 0 && currentIndex<pageList.length-1) {
                 currentIndex++;
-            } else {
+            } else if(moveY < 0 && currentIndex>0) {
                 currentIndex--;
+            }else{
+                return;
             }
             _initAnimate()
         }
     }
     function _initAnimate() {
-        pageUl.style.top = (currentIndex % pageList.length) * -clientHeight + 'px'; 
-        var last = moveY > 0 ? currentIndex - 1 : currentIndex + 1
+        pageUl.style.top = (currentIndex) * -clientHeight + 'px'; 
+        var last = moveY > 0 ? currentIndex - 1 : currentIndex + 1;
         Array.prototype.forEach.call(pageList[last].children, function(element, index) {
-            element.setAttribute('class', '')
+            element.setAttribute('class', '');
         });
         Array.prototype.forEach.call(pageList[currentIndex].children, function(element, index) {
-            element.setAttribute('class', 'animated '+animate[index])
+            element.setAttribute('class', 'animated '+animate[index]);
         });
     }
 })()

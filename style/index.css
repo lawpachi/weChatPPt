@@ -18,6 +18,12 @@ html, body {
     transition: top .6s;
     top: 0;
 }
+.music{
+    position: absolute;
+    right: .8rem;
+    top: 1rem;
+    z-index: 100;
+}
 .page {
     width: 100%;
     height: 100%;
@@ -42,4 +48,22 @@ html, body {
     position: absolute;
     left: 0em;
     bottom: 38px;
+}
+.bottomContent{
+    text-align: left;
+    width: 82%;
+    margin: 2.5rem auto;
+} 
+.infoAbsolute {
+    width: 100%;
+    top: 0em;
+    left: 0em;
+}
+.bottomImgLeftRight {
+    width: 100%;
+    position: relative;
+}
+.bottomImgLeftRight div{
+    display: inline-block;
+    width: 48%;
 }
