@@ -14,10 +14,12 @@
         page.addEventListener('touchstart', _start);
         page.addEventListener('touchmove', _move);
         page.addEventListener('touchend', _end);
-        music.addEventListener('click', _toggleMusic)
+        music.addEventListener('touchend', _toggleMusic)
     }
-    
-    function _toggleMusic() {
+    console.log('User-Agent', window.navigator.userAgent)
+    function _toggleMusic(event) {
+        event.preventDefault();
+        event.stopPropagation();
         if(audio.paused) {
             musicBg.setAttribute('src', 'images/open.png')
             audio.play()
